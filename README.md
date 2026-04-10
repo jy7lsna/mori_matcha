@@ -1,6 +1,6 @@
 # 🍵 Mori & Mochi - Full-Stack Matcha Cafe Website
 
-A **production-ready** full-stack web application for a matcha cafe featuring customer ordering, real-time order tracking, secure admin dashboard, and comprehensive analytics.
+A **production-ready** cute matcha website i made for fun. if you liked it hire me to build websites for your buisness. thanks : )
 
 **Live Features:** Menu browsing • Shopping cart • Order placement • Public order tracking • Admin dashboard • Sales metrics • Email notifications • Mobile responsive
 
