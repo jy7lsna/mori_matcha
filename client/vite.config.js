@@ -7,5 +7,8 @@ export default defineConfig({
     proxy: {
       "/api": "http://localhost:5000"
     }
+  },
+  preview: {
+    allowedHosts: ["mori-matcha-1.onrender.com"]
   }
 });
