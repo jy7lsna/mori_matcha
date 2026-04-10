@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mori & Mochi — Matcha Café</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Italiana&family=Fraunces:ital,opsz,wght@0,9..144,200..900;1,9..144,200..900&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #fdf8f2;
+    --matcha: #3a6b35;
+    --matcha-light: #6a9e5f;
+    --matcha-pale: #b8d4a8;
+    --matcha-mist: #e8f0e4;
+    --dark: #1c1108;
+    --brown: #5c3d2e;
+    --peach: #e8c4a0;
+    --rose: #d4836a;
+    --blush: #f5e0d6;
+    --gold: #c9a96e;
+    --sage: #8aac7e;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--dark);
+    font-family: 'Crimson Pro', serif;
+    overflow-x: hidden;
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='4' fill='%233a6b35' opacity='0.7'/%3E%3C/svg%3E") 10 10, auto;
+  }
+
+  /* ─── NOISE TEXTURE OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.6;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 3rem;
+    mix-blend-mode: multiply;
+  }
+
+  .nav-logo {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2rem;
+    color: var(--matcha);
+    letter-spacing: 0.02em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'Fraunces', serif;
+    font-size: 0.8rem;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--dark);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--matcha); }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10rem 4rem 6rem 5rem;
+    position: relative;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Great Vibes', cursive;
+    font-size: 1.6rem;
+    color: var(--rose);
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-title {
+    font-family: 'Italiana', serif;
+    font-size: clamp(4rem, 8vw, 7.5rem);
+    line-height: 0.95;
+    color: var(--dark);
+    letter-spacing: -0.02em;
+    position: relative;
+  }
+
+  .hero-title .word-matcha {
+    color: var(--matcha);
+    font-style: italic;
+    display: block;
+  }
+
+  .hero-title .word-mochi {
+    display: block;
+  }
+
+  .hero-desc {
+    font-size: 1.25rem;
+    color: var(--brown);
+    margin-top: 2rem;
+    max-width: 380px;
+    line-height: 1.8;
+    font-style: italic;
+    font-weight: 300;
+  }
+
+  .hero-cta-row {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .btn-primary {
+    background: var(--matcha);
+    color: var(--cream);
+    font-family: 'Fraunces', serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border: none;
+    padding: 1rem 2.5rem;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .btn-primary:hover { background: var(--dark); transform: translateY(-2px); }
+
+  .btn-ghost {
+    font-family: 'Fraunces', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--brown);
+    text-decoration: none;
+    border-bottom: 1px solid var(--brown);
+    padding-bottom: 2px;
+    transition: color 0.3s;
+  }
+
+  .btn-ghost:hover { color: var(--matcha); border-color: var(--matcha); }
+
+  .hero-right {
+    position: relative;
+    background: var(--matcha-mist);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .hero-illustration {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+  }
+
+  /* ─── DECORATIVE FLOATERS ─── */
+  .floater {
+    position: absolute;
+    border-radius: 50%;
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .floater-1 {
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, var(--matcha-pale), transparent);
+    top: 10%; right: -50px;
+    animation-delay: 0s;
+    opacity: 0.5;
+  }
+
+  .floater-2 {
+    width: 150px; height: 150px;
+    background: radial-gradient(circle, var(--peach), transparent);
+    bottom: 20%; left: 5%;
+    animation-delay: 2s;
+    opacity: 0.6;
+  }
+
+  .floater-3 {
+    width: 80px; height: 80px;
+    background: radial-gradient(circle, var(--gold), transparent);
+    top: 30%; left: 20%;
+    animation-delay: 4s;
+    opacity: 0.4;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(5deg); }
+  }
+
+  /* ─── BIG MATCHA BOWL SVG ─── */
+  .hero-bowl-wrap {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    padding: 4rem 2rem;
+  }
+
+  .hero-badge {
+    background: var(--matcha);
+    color: var(--cream);
+    font-family: 'Great Vibes', cursive;
+    font-size: 1.4rem;
+    padding: 0.6rem 2rem;
+    transform: rotate(-3deg);
+  }
+
+  .hero-bowl-tags {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .tag {
+    font-family: 'Fraunces', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: 1px solid var(--matcha);
+    color: var(--matcha);
+    padding: 0.4rem 1rem;
+  }
+
+  /* ─── MARQUEE ─── */
+  .marquee-wrap {
+    background: var(--matcha);
+    overflow: hidden;
+    padding: 0.8rem 0;
+    position: relative;
+  }
+
+  .marquee-track {
+    display: flex;
+    animation: marquee 20s linear infinite;
+    white-space: nowrap;
+  }
+
+  .marquee-track span {
+    font-family: 'Great Vibes', cursive;
+    font-size: 1.5rem;
+    color: var(--matcha-pale);
+    margin: 0 3rem;
+    flex-shrink: 0;
+  }
+
+  .marquee-track .dot {
+    color: var(--peach);
+    margin: 0 1rem;
+    font-family: sans-serif;
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* ─── SECTION SHARED ─── */
+  section { position: relative; }
+
+  .section-label {
+    font-family: 'Fraunces', serif;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--rose);
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: 'Italiana', serif;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    line-height: 1.05;
+    color: var(--dark);
+  }
+
+  /* ─── ABOUT ─── */
+  .about {
+    padding: 8rem 5rem;
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .about-left {
+    position: relative;
+  }
+
+  .about-card {
+    background: var(--blush);
+    padding: 3rem;
+    position: relative;
+  }
+
+  .about-card::before {
+    content: '';
+    position: absolute;
+    top: 12px; left: 12px;
+    right: -12px; bottom: -12px;
+    border: 1px solid var(--matcha-pale);
+    z-index: -1;
+  }
+
+  .about-stat {
+    font-family: 'Italiana', serif;
+    font-size: 4.5rem;
+    color: var(--matcha);
+    line-height: 1;
+  }
+
+  .about-stat-label {
+    font-family: 'Crimson Pro', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--brown);
+    margin-top: 0.3rem;
+  }
+
+  .about-stat-row {
+    display: flex;
+    gap: 3rem;
+    margin-top: 2rem;
+  }
+
+  .about-right p {
+    font-size: 1.2rem;
+    line-height: 1.9;
+    color: var(--brown);
+    font-weight: 300;
+    max-width: 520px;
+  }
+
+  .about-right p + p { margin-top: 1.5rem; }
+
+  .about-right .quote {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.5rem;
+    color: var(--matcha);
+    display: block;
+    margin: 2rem 0 1rem;
+  }
+
+  /* ─── MENU ─── */
+  .menu {
+    background: var(--dark);
+    padding: 8rem 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .menu::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, var(--matcha) 0%, transparent 70%);
+    opacity: 0.15;
+  }
+
+  .menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 5rem;
+  }
+
+  .menu .section-title { color: var(--cream); }
+  .menu .section-label { color: var(--matcha-pale); }
+
+  .menu-subtitle {
+    font-family: 'Crimson Pro', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--matcha-pale);
+    max-width: 300px;
+    text-align: right;
+    line-height: 1.7;
+  }
+
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .menu-item {
+    background: #2a1f14;
+    padding: 3rem 2.5rem;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: background 0.4s;
+  }
+
+  .menu-item:hover { background: #3a2e20; }
+
+  .menu-item::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--matcha);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+
+  .menu-item:hover::after { transform: scaleX(1); }
+
+  .item-emoji {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 1.5rem;
+    filter: saturate(0.8);
+  }
+
+  .item-category {
+    font-family: 'Fraunces', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 0.5rem;
+  }
+
+  .item-name {
+    font-family: 'Italiana', serif;
+    font-size: 1.8rem;
+    color: var(--cream);
+    line-height: 1.1;
+    margin-bottom: 0.8rem;
+  }
+
+  .item-desc {
+    font-family: 'Crimson Pro', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: #8a7a68;
+    line-height: 1.6;
+  }
+
+  .item-price {
+    font-family: 'Fraunces', serif;
+    font-size: 0.9rem;
+    color: var(--gold);
+    margin-top: 1.5rem;
+    letter-spacing: 0.05em;
+  }
+
+  /* ─── LARGE FEATURE ─── */
+  .feature {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 70vh;
+  }
+
+  .feature-visual {
+    background: var(--matcha-mist);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem;
+  }
+
+  .feature-content {
+    padding: 8rem 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: var(--blush);
+  }
+
+  .feature-content .section-title { margin-bottom: 1.5rem; }
+
+  .feature-content p {
+    font-size: 1.15rem;
+    color: var(--brown);
+    line-height: 1.9;
+    font-weight: 300;
+    max-width: 400px;
+    margin-bottom: 2rem;
+  }
+
+  /* ─── DECORATIVE SVG CIRCLES ─── */
+  .deco-circle {
+    position: absolute;
+    border-radius: 50%;
+  }
+
+  /* ─── SPECIALS STRIP ─── */
+  .specials {
+    padding: 7rem 5rem;
+    background: var(--cream);
+    position: relative;
+  }
+
+  .specials-inner {
+    display: flex;
+    gap: 0;
+    border: 1px solid var(--matcha-pale);
+  }
+
+  .special-card {
+    flex: 1;
+    padding: 3rem;
+    border-right: 1px solid var(--matcha-pale);
+    transition: background 0.3s;
+    position: relative;
+  }
+
+  .special-card:last-child { border-right: none; }
+
+  .special-card:hover { background: var(--matcha-mist); }
+
+  .special-number {
+    font-family: 'Italiana', serif;
+    font-size: 5rem;
+    color: var(--matcha-pale);
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+
+  .special-name {
+    font-family: 'Italiana', serif;
+    font-size: 1.6rem;
+    color: var(--dark);
+    margin-bottom: 0.8rem;
+  }
+
+  .special-desc {
+    font-family: 'Crimson Pro', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--brown);
+    line-height: 1.7;
+  }
+
+  .special-badge {
+    position: absolute;
+    top: 2rem; right: 2rem;
+    background: var(--rose);
+    color: var(--cream);
+    font-family: 'Great Vibes', cursive;
+    font-size: 0.9rem;
+    padding: 0.3rem 0.8rem;
+    transform: rotate(3deg);
+  }
+
+  /* ─── TESTIMONIAL ─── */
+  .testimonial {
+    background: var(--matcha);
+    padding: 7rem 5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .testimonial::before {
+    content: '❝';
+    position: absolute;
+    top: -1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 18rem;
+    color: rgba(255,255,255,0.05);
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .testimonial-text {
+    font-family: 'Italiana', serif;
+    font-size: clamp(1.8rem, 3.5vw, 3rem);
+    color: var(--cream);
+    line-height: 1.4;
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    font-style: italic;
+  }
+
+  .testimonial-author {
+    font-family: 'Fraunces', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--matcha-pale);
+    margin-top: 2rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ─── OPENING HOURS ─── */
+  .hours {
+    padding: 7rem 5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8rem;
+    align-items: center;
+  }
+
+  .hours-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .hours-table tr {
+    border-bottom: 1px solid var(--matcha-pale);
+  }
+
+  .hours-table td {
+    font-family: 'Crimson Pro', serif;
+    font-size: 1.1rem;
+    color: var(--brown);
+    padding: 1rem 0;
+  }
+
+  .hours-table td:last-child {
+    text-align: right;
+    color: var(--matcha);
+    font-style: italic;
+  }
+
+  .hours-title { margin-bottom: 3rem; }
+
+  .location-card {
+    background: var(--matcha-mist);
+    padding: 3rem;
+    border-left: 3px solid var(--matcha);
+  }
+
+  .location-card h3 {
+    font-family: 'Italiana', serif;
+    font-size: 1.8rem;
+    color: var(--dark);
+    margin-bottom: 1rem;
+  }
+
+  .location-card p {
+    font-family: 'Crimson Pro', serif;
+    font-size: 1.1rem;
+    color: var(--brown);
+    line-height: 1.8;
+    font-style: italic;
+  }
+
+  .location-card .section-label {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--dark);
+    padding: 5rem 5rem 3rem;
+    color: var(--cream);
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 6rem;
+    padding-bottom: 4rem;
+    border-bottom: 1px solid #3a2e20;
+  }
+
+  .footer-logo {
+    font-family: 'Great Vibes', cursive;
+    font-size: 3rem;
+    color: var(--matcha-pale);
+    display: block;
+    margin-bottom: 1.5rem;
+  }
+
+  .footer-tagline {
+    font-family: 'Crimson Pro', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: #8a7a68;
+    line-height: 1.7;
+    max-width: 300px;
+  }
+
+  .footer-col h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--matcha-pale);
+    margin-bottom: 1.5rem;
+  }
+
+  .footer-col ul { list-style: none; }
+
+  .footer-col ul li {
+    margin-bottom: 0.8rem;
+    font-family: 'Crimson Pro', serif;
+    font-size: 1rem;
+    color: #8a7a68;
+    transition: color 0.3s;
+  }
+
+  .footer-col ul li:hover { color: var(--cream); cursor: pointer; }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 2rem;
+  }
+
+  .footer-copy {
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.85rem;
+    color: #4a3e32;
+    font-style: italic;
+  }
+
+  .footer-made {
+    font-family: 'Great Vibes', cursive;
+    font-size: 1.2rem;
+    color: var(--matcha-light);
+  }
+
+  /* ─── DECORATIVE BORDER ELEMENTS ─── */
+  .deco-border-top {
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--matcha), var(--sage), var(--peach), var(--rose), var(--gold));
+  }
+
+  .wavy-divider {
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: translateY(1px);
+  }
+
+  /* ─── LOAD ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .hero-left > * {
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards;
+  }
+
+  .hero-eyebrow { animation-delay: 0.2s; }
+  .hero-title { animation-delay: 0.4s; }
+  .hero-desc { animation-delay: 0.6s; }
+  .hero-cta-row { animation-delay: 0.8s; }
+
+  /* ─── SPINNING BOTANICAL ─── */
+  .botanical-spin {
+    position: absolute;
+    bottom: 3rem;
+    right: 3rem;
+    width: 100px;
+    height: 100px;
+    animation: spin-slow 20s linear infinite;
+    opacity: 0.3;
+  }
+
+  /* ─── SCROLLING APPEAR ─── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── PROGRESS BAR ─── */
+  .progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: var(--matcha);
+    z-index: 999;
+    transition: width 0.1s;
+  }
+
+  /* ─── BIG SVG BOWL ILLUSTRATION ─── */
+  .bowl-svg-container {
+    position: relative;
+    width: 280px;
+    height: 280px;
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progress"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Mori & Mochi</div>
+  <ul class="nav-links">
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#about">Our Story</a></li>
+    <li><a href="#specials">Specials</a></li>
+    <li><a href="#hours">Visit Us</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="floater floater-2"></div>
+    <div class="floater floater-3"></div>
+    <p class="hero-eyebrow">A little café in the forest</p>
+    <h1 class="hero-title">
+      <span class="word-mochi">Mori</span>
+      <span class="word-matcha">&amp; Mochi</span>
+    </h1>
+    <p class="hero-desc">
+      Where ceremonial matcha meets fresh-baked bread, 
+      handmade mochi, and the sweetest little desserts. 
+      A cozy corner to slow down and savour.
+    </p>
+    <div class="hero-cta-row">
+      <a href="#menu" class="btn-primary">Explore Menu</a>
+      <a href="#specials" class="btn-ghost">Today's Specials</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="floater floater-1"></div>
+
+    <!-- Large decorative SVG illustration -->
+    <div class="hero-bowl-wrap">
+      <div class="hero-badge">hand-whisked daily ✦</div>
+
+      <svg width="280" height="280" viewBox="0 0 280 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Matcha bowl -->
+        <ellipse cx="140" cy="155" rx="100" ry="30" fill="#2d5a27" opacity="0.15"/>
+        <path d="M50 120 Q50 200 140 210 Q230 200 230 120 Z" fill="#f5f0e8" stroke="#3a6b35" stroke-width="2"/>
+        <path d="M50 120 Q140 105 230 120" stroke="#3a6b35" stroke-width="2" fill="none"/>
+        <!-- Matcha liquid -->
+        <ellipse cx="140" cy="125" rx="75" ry="20" fill="#6a9e5f" opacity="0.7"/>
+        <!-- Froth pattern -->
+        <path d="M90 120 Q110 115 130 120 Q150 125 170 120 Q190 115 200 120" stroke="#b8d4a8" stroke-width="1.5" fill="none"/>
+        <path d="M100 128 Q120 123 140 128 Q160 133 180 128" stroke="#b8d4a8" stroke-width="1" fill="none" opacity="0.6"/>
+        <!-- Steam -->
+        <path d="M120 95 Q115 80 120 65" stroke="#c4a882" stroke-width="1.5" fill="none" opacity="0.5" stroke-linecap="round"/>
+        <path d="M140 90 Q135 72 140 55" stroke="#c4a882" stroke-width="1.5" fill="none" opacity="0.5" stroke-linecap="round"/>
+        <path d="M160 95 Q165 80 160 65" stroke="#c4a882" stroke-width="1.5" fill="none" opacity="0.5" stroke-linecap="round"/>
+        <!-- Leaf garnish -->
+        <path d="M200 100 Q220 85 215 70 Q200 80 200 100Z" fill="#6a9e5f" opacity="0.8"/>
+        <path d="M215 70 L205 88" stroke="#3a6b35" stroke-width="0.8"/>
+        <!-- Cherry blossom decorations -->
+        <circle cx="68" cy="80" r="5" fill="#e8c4a0" opacity="0.6"/>
+        <circle cx="75" cy="72" r="4" fill="#d4836a" opacity="0.5"/>
+        <circle cx="85" cy="78" r="3" fill="#e8c4a0" opacity="0.6"/>
+        <!-- Decorative ring -->
+        <circle cx="140" cy="140" r="120" stroke="#3a6b35" stroke-width="0.5" fill="none" stroke-dasharray="4 6" opacity="0.3"/>
+        <!-- Small matcha whisker (chasen) -->
+        <path d="M220 155 L235 140 M222 160 L240 148 M218 165 L234 158" stroke="#8aac7e" stroke-width="1" opacity="0.7"/>
+        <!-- Sakura petals floating -->
+        <ellipse cx="40" cy="150" rx="6" ry="3" fill="#f0d4c8" opacity="0.7" transform="rotate(-20 40 150)"/>
+        <ellipse cx="250" cy="100" rx="5" ry="2.5" fill="#f0d4c8" opacity="0.6" transform="rotate(15 250 100)"/>
+      </svg>
+
+      <div class="hero-bowl-tags">
+        <span class="tag">Ceremonial Grade</span>
+        <span class="tag">Uji Matcha</span>
+        <span class="tag">Artisan Bread</span>
+        <span class="tag">Handmade Mochi</span>
+      </div>
+    </div>
+
+    <!-- Spinning botanical -->
+    <svg class="botanical-spin" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="50" r="45" stroke="#3a6b35" stroke-width="0.5" stroke-dasharray="3 5"/>
+      <text x="50" y="20" text-anchor="middle" font-size="7" fill="#3a6b35" font-family="serif" letter-spacing="3">OPEN</text>
+      <text x="50" y="85" text-anchor="middle" font-size="7" fill="#3a6b35" font-family="serif" letter-spacing="3">DAILY</text>
+      <text x="15" y="55" font-size="7" fill="#3a6b35" font-family="serif" letter-spacing="3" transform="rotate(-90 15 55)">8AM</text>
+      <text x="82" y="55" font-size="7" fill="#3a6b35" font-family="serif" letter-spacing="3" transform="rotate(90 82 55)">9PM</text>
+      <circle cx="50" cy="50" r="3" fill="#3a6b35"/>
+      <line x1="50" y1="50" x2="50" y2="15" stroke="#3a6b35" stroke-width="0.8"/>
+      <line x1="50" y1="50" x2="75" y2="65" stroke="#3a6b35" stroke-width="0.5"/>
+    </svg>
+
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span>Ceremonial Matcha</span><span class="dot">✦</span>
+    <span>Freshly Baked Breads</span><span class="dot">✦</span>
+    <span>Handmade Mochi</span><span class="dot">✦</span>
+    <span>Seasonal Pastries</span><span class="dot">✦</span>
+    <span>Uji Green Tea</span><span class="dot">✦</span>
+    <span>Yuzu Cheesecake</span><span class="dot">✦</span>
+    <span>Matcha Croissants</span><span class="dot">✦</span>
+    <span>Ceremonial Matcha</span><span class="dot">✦</span>
+    <span>Freshly Baked Breads</span><span class="dot">✦</span>
+    <span>Handmade Mochi</span><span class="dot">✦</span>
+    <span>Seasonal Pastries</span><span class="dot">✦</span>
+    <span>Uji Green Tea</span><span class="dot">✦</span>
+    <span>Yuzu Cheesecake</span><span class="dot">✦</span>
+    <span>Matcha Croissants</span><span class="dot">✦</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about reveal" id="about">
+  <div class="about-left">
+    <div class="about-card">
+      <p class="section-label">Established 2019</p>
+      <div class="about-stat-row">
+        <div>
+          <div class="about-stat">47</div>
+          <div class="about-stat-label">recipes crafted</div>
+        </div>
+        <div>
+          <div class="about-stat">03</div>
+          <div class="about-stat-label">matcha origins</div>
+        </div>
+      </div>
+
+      <!-- Mini leaf illustration -->
+      <svg width="120" height="80" viewBox="0 0 120 80" fill="none" style="margin-top: 2rem; display:block; opacity:0.4;">
+        <path d="M10 70 Q40 20 110 10 Q80 50 10 70Z" fill="#3a6b35"/>
+        <path d="M10 70 Q55 40 110 10" stroke="#fdf8f2" stroke-width="1"/>
+        <path d="M20 65 Q50 45 90 20" stroke="#fdf8f2" stroke-width="0.5" opacity="0.6"/>
+        <path d="M35 60 Q60 48 85 30" stroke="#fdf8f2" stroke-width="0.5" opacity="0.4"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="about-right">
+    <p class="section-label">Our Philosophy</p>
+    <h2 class="section-title">Tea as a<br><em>ritual,</em> not a<br>routine.</h2>
+    <span class="quote">slow down, sip deeply</span>
+    <p>Born from a love of Japanese tea ceremony and the comforting warmth of a neighbourhood bakery, Mori & Mochi is our little world between the two. Every cup of matcha is whisked to order. Every loaf is shaped by hand before sunrise.</p>
+    <p>We source our ceremonial grade matcha directly from small farms in Uji and Kagoshima — the kind that turns a brilliant, almost electric green. The kind that makes you pause.</p>
+    <a href="#menu" class="btn-ghost" style="display:inline-block; margin-top: 2rem;">See what's brewing →</a>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="menu reveal" id="menu">
+  <div class="menu-header">
+    <div>
+      <p class="section-label">What We Make</p>
+      <h2 class="section-title">The Menu</h2>
+    </div>
+    <p class="menu-subtitle">Everything made with intention, from scratch, every morning.</p>
+  </div>
+
+  <div class="menu-grid">
+    <div class="menu-item">
+      <span class="item-emoji">🍵</span>
+      <div class="item-category">Matcha</div>
+      <div class="item-name">Ceremonial<br>Matcha Latte</div>
+      <div class="item-desc">Whisked uji ceremonial matcha, oat milk steamed to silk, a breath of vanilla.</div>
+      <div class="item-price">₹ 280</div>
+    </div>
+
+    <div class="menu-item">
+      <span class="item-emoji">🥐</span>
+      <div class="item-category">Bakery</div>
+      <div class="item-name">Matcha<br>Croissant</div>
+      <div class="item-desc">Laminated dough swirled with ceremonial matcha butter. Shatteringly crisp outside.</div>
+      <div class="item-price">₹ 180</div>
+    </div>
+
+    <div class="menu-item">
+      <span class="item-emoji">🍡</span>
+      <div class="item-category">Sweets</div>
+      <div class="item-name">Strawberry<br>Daifuku</div>
+      <div class="item-desc">Soft mochi skin, white bean paste, a whole fresh strawberry hiding inside.</div>
+      <div class="item-price">₹ 120</div>
+    </div>
+
+    <div class="menu-item">
+      <span class="item-emoji">🧇</span>
+      <div class="item-category">Drinks</div>
+      <div class="item-name">Hojicha<br>Cold Brew</div>
+      <div class="item-desc">Roasted hojicha, slow-steeped 16 hours. Warm toasty notes, naturally low caffeine.</div>
+      <div class="item-price">₹ 220</div>
+    </div>
+
+    <div class="menu-item">
+      <span class="item-emoji">🍞</span>
+      <div class="item-category">Bakery</div>
+      <div class="item-name">Shokupan<br>Toast</div>
+      <div class="item-desc">Japanese milk bread, cloud-soft, with cultured butter and seasonal jam. A ritual.</div>
+      <div class="item-price">₹ 150</div>
+    </div>
+
+    <div class="menu-item">
+      <span class="item-emoji">🍰</span>
+      <div class="item-category">Desserts</div>
+      <div class="item-name">Yuzu<br>Cheesecake</div>
+      <div class="item-desc">Baked cotton-soft with yuzu zest, set on a toasted sesame biscuit base. Luminous.</div>
+      <div class="item-price">₹ 240</div>
+    </div>
+
+    <div class="menu-item">
+      <span class="item-emoji">🫖</span>
+      <div class="item-category">Tea</div>
+      <div class="item-name">Gyokuro<br>Single Serve</div>
+      <div class="item-desc">Shade-grown, umami-rich green tea. Brewed at exactly 60°C to coax out its sweetness.</div>
+      <div class="item-price">₹ 320</div>
+    </div>
+
+    <div class="menu-item">
+      <span class="item-emoji">🍩</span>
+      <div class="item-category">Pastry</div>
+      <div class="item-name">Matcha<br>Financier</div>
+      <div class="item-desc">Brown butter, almond flour, ceremonial matcha. Small, perfect, impossible to have just one.</div>
+      <div class="item-price">₹ 130</div>
+    </div>
+
+    <div class="menu-item">
+      <span class="item-emoji">🥛</span>
+      <div class="item-category">Specials</div>
+      <div class="item-name">Sakura<br>Matcha</div>
+      <div class="item-desc">Limited spring edition — salted cherry blossom salt rim, rose-infused oat milk, matcha.</div>
+      <div class="item-price">₹ 340 <span style="color: var(--rose); font-size:0.7rem; margin-left:0.5rem;">SEASONAL</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURE SECTION -->
+<section class="feature">
+  <div class="feature-visual">
+    <!-- Decorative matcha swirl -->
+    <svg width="300" height="300" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+      <!-- Big layered circles -->
+      <circle cx="150" cy="150" r="130" stroke="#3a6b35" stroke-width="0.5" fill="none" opacity="0.2"/>
+      <circle cx="150" cy="150" r="100" stroke="#3a6b35" stroke-width="0.5" fill="none" opacity="0.3"/>
+      <circle cx="150" cy="150" r="70" fill="#b8d4a8" opacity="0.3"/>
+      <circle cx="150" cy="150" r="50" fill="#6a9e5f" opacity="0.4"/>
+      <circle cx="150" cy="150" r="30" fill="#3a6b35" opacity="0.7"/>
+      <!-- Whisking lines (chasen effect) -->
+      <g opacity="0.6">
+        <path d="M150 150 Q145 120 148 90" stroke="#fdf8f2" stroke-width="1" fill="none"/>
+        <path d="M150 150 Q158 120 162 90" stroke="#fdf8f2" stroke-width="1" fill="none"/>
+        <path d="M150 150 Q165 125 180 100" stroke="#fdf8f2" stroke-width="1" fill="none"/>
+        <path d="M150 150 Q170 140 200 138" stroke="#fdf8f2" stroke-width="1" fill="none"/>
+        <path d="M150 150 Q165 160 185 180" stroke="#fdf8f2" stroke-width="1" fill="none"/>
+        <path d="M150 150 Q140 165 135 195" stroke="#fdf8f2" stroke-width="1" fill="none"/>
+        <path d="M150 150 Q125 158 100 170" stroke="#fdf8f2" stroke-width="1" fill="none"/>
+        <path d="M150 150 Q120 140 95 128" stroke="#fdf8f2" stroke-width="1" fill="none"/>
+        <path d="M150 150 Q130 120 120 95" stroke="#fdf8f2" stroke-width="1" fill="none"/>
+      </g>
+      <!-- Center dot -->
+      <circle cx="150" cy="150" r="5" fill="#fdf8f2"/>
+      <!-- Decorative petal ring -->
+      <g opacity="0.25">
+        <ellipse cx="150" cy="30" rx="8" ry="15" fill="#e8c4a0" transform="rotate(0 150 150)"/>
+        <ellipse cx="150" cy="30" rx="8" ry="15" fill="#e8c4a0" transform="rotate(45 150 150)"/>
+        <ellipse cx="150" cy="30" rx="8" ry="15" fill="#e8c4a0" transform="rotate(90 150 150)"/>
+        <ellipse cx="150" cy="30" rx="8" ry="15" fill="#e8c4a0" transform="rotate(135 150 150)"/>
+        <ellipse cx="150" cy="30" rx="8" ry="15" fill="#e8c4a0" transform="rotate(180 150 150)"/>
+        <ellipse cx="150" cy="30" rx="8" ry="15" fill="#e8c4a0" transform="rotate(225 150 150)"/>
+        <ellipse cx="150" cy="30" rx="8" ry="15" fill="#e8c4a0" transform="rotate(270 150 150)"/>
+        <ellipse cx="150" cy="30" rx="8" ry="15" fill="#e8c4a0" transform="rotate(315 150 150)"/>
+      </g>
+    </svg>
+
+    <!-- Floating decorative text -->
+    <svg style="position:absolute; bottom: 2rem; left: 2rem; opacity: 0.35;" width="160" height="40" viewBox="0 0 160 40">
+      <text x="0" y="30" font-family="serif" font-size="11" fill="#2d5a27" letter-spacing="3" font-style="italic">ceremony · ritual · craft</text>
+    </svg>
+  </div>
+
+  <div class="feature-content reveal">
+    <p class="section-label">The Art of Matcha</p>
+    <h2 class="section-title">Whisked<br>by hand,<br><em>every time.</em></h2>
+    <p>We never pour from a machine. Each matcha is whisked in a hand-thrown ceramic bowl using a traditional chasen, bringing out the full body, sweetness, and umami of the leaf. It takes 40 extra seconds. It makes all the difference.</p>
+    <a href="#menu" class="btn-primary">Order Matcha</a>
+  </div>
+</section>
+
+<!-- SPECIALS -->
+<section class="specials reveal" id="specials">
+  <p class="section-label" style="margin-bottom: 1rem;">On The Table Today</p>
+  <h2 class="section-title" style="margin-bottom: 4rem;">Daily Specials</h2>
+
+  <div class="specials-inner">
+    <div class="special-card">
+      <div class="special-number">01</div>
+      <div class="special-name">Iced Matchaccino</div>
+      <div class="special-desc">Cold ceremonial matcha pulled espresso-style over ice, topped with micro-foam. An obsession.</div>
+      <div class="special-badge">new ✦</div>
+    </div>
+    <div class="special-card">
+      <div class="special-number">02</div>
+      <div class="special-name">Black Sesame Roll</div>
+      <div class="special-desc">Pillowy shokupan swirled with roasted black sesame paste and just enough brown sugar.</div>
+    </div>
+    <div class="special-card">
+      <div class="special-number">03</div>
+      <div class="special-name">Azuki Cream Puff</div>
+      <div class="special-desc">Choux pastry filled with sweet red bean cream and topped with craquelin. Cloud-light.</div>
+      <div class="special-badge" style="background: var(--matcha);">favourite</div>
+    </div>
+    <div class="special-card">
+      <div class="special-number">04</div>
+      <div class="special-name">Forest Tiramisu</div>
+      <div class="special-desc">Our take — hojicha-soaked ladyfingers, mascarpone, dusted with ceremonial matcha powder.</div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="testimonial">
+  <p class="testimonial-text">"The kind of place you find on accident, then tell everyone about. The matcha tastes like it was grown specifically for this room."</p>
+  <p class="testimonial-author">— Priya S., food writer & regular</p>
+</section>
+
+<!-- HOURS -->
+<section class="hours reveal" id="hours">
+  <div>
+    <p class="section-label hours-title">Opening Hours</p>
+    <table class="hours-table">
+      <tr><td>Monday — Friday</td><td>8:00 am — 9:00 pm</td></tr>
+      <tr><td>Saturday</td><td>8:00 am — 10:00 pm</td></tr>
+      <tr><td>Sunday</td><td>9:00 am — 8:00 pm</td></tr>
+      <tr><td>Public Holidays</td><td>10:00 am — 6:00 pm</td></tr>
+    </table>
+    <p style="font-family:'Crimson Pro',serif; font-style:italic; color:var(--brown); margin-top:2rem; font-size:1rem;">Matcha service ends 30 minutes before closing. Last seating 45 min before close.</p>
+  </div>
+
+  <div>
+    <div class="location-card">
+      <span class="section-label">Find Us</span>
+      <h3>Hauz Khas Village<br>New Delhi</h3>
+      <p>12, Deer Park Lane<br>Hauz Khas Village, New Delhi — 110016<br><br>Near the lake entrance, look for the green door with the bamboo wind chimes.</p>
+    </div>
+
+    <div style="margin-top: 2rem; padding: 2rem; background: var(--matcha-mist); border-left: 3px solid var(--peach);">
+      <p class="section-label">Reservations</p>
+      <p style="font-family:'Crimson Pro',serif; font-size:1.1rem; color:var(--brown); line-height:1.8;">We don't take reservations — walk-ins only, always. The wait is part of the ritual.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <span class="footer-logo">Mori & Mochi</span>
+      <p class="footer-tagline">A small café with a deep belief that good matcha and warm bread can fix most things.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Menu</h4>
+      <ul>
+        <li>Matcha & Tea</li>
+        <li>Bakery</li>
+        <li>Mochi & Sweets</li>
+        <li>Seasonal Specials</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Follow Along</h4>
+      <ul>
+        <li>Instagram</li>
+        <li>Pinterest</li>
+        <li>Newsletter</li>
+        <li>Press</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 Mori & Mochi. All rights reserved.</p>
+    <span class="footer-made">made with matcha & love ✦</span>
+  </div>
+</footer>
+
+<script>
+  // Progress bar
+  window.addEventListener('scroll', () => {
+    const scrolled = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+    document.getElementById('progress').style.width = scrolled + '%';
+  });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
