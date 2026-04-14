@@ -47,24 +47,6 @@ cd client && npm run dev
 📍 Order Tracking:    http://localhost:5173/track
 🔗 Backend API:       http://localhost:5000/api
 ```
-
----
-
-## 📖 Documentation
-
-Start here based on what you need:
-
-| Goal | Document |
-|------|----------|
-| 🧪 Test the application | [TESTING.md](TESTING.md) - 12 complete test scenarios |
-| 🚀 Deploy to production | [DEPLOYMENT.md](DEPLOYMENT.md) - Step-by-step guide |
-| 📚 Understand all APIs | [API_REFERENCE.md](API_REFERENCE.md) - Complete endpoint docs |
-| 🔐 Review security | [SECURITY.md](SECURITY.md) - Security features & hardening |
-| ✨ See new features | [NEW_FEATURES.md](NEW_FEATURES.md) - Order tracking, notifications |
-| 🎨 View UI improvements | [UI_UX_IMPROVEMENTS.md](UI_UX_IMPROVEMENTS.md) - UX enhancements |
-| 👤 Manage admins | [MONGODB_ADMIN_GUIDE.md](MONGODB_ADMIN_GUIDE.md) - User management |
-| 📋 All docs | [DOCS_HUB.md](DOCS_HUB.md) - Complete documentation index |
-
 ---
 
 ## ✨ Features
